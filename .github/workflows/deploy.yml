@@ -32,10 +32,19 @@ jobs:
       - name: Build project
         run: npm run build -- --base-href "/olymp-guide/"
 
+      - name: Detect dist folder
+        id: dist
+        run: |
+          if [ -d "dist/olymp-guide/browser" ]; then
+            echo "path=dist/olymp-guide/browser" >> $GITHUB_OUTPUT
+          else
+            echo "path=dist/olymp-guide" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/olymp-guide
+          path: ${{ steps.dist.outputs.path }}
 
   deploy:
     needs: build
