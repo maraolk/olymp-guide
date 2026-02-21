@@ -1,0 +1,36 @@
+@if (olympiad) {
+
+  <div class="details-card">
+    <h2>{{ olympiad.name }}</h2>
+
+    @if (olympiad.level !== null) {
+      <p class="badge">Уровень {{ olympiad.level }}</p>
+    } @else {
+      <p class="badge">Государственная олимпиада</p>
+    }
+
+    <p class="desc">{{ olympiad.description }}</p>
+
+    <div class="buttons">
+      <a class="btn" [href]="olympiad.website" target="_blank">Официальный сайт</a>
+      <a class="btn primary" routerLink="/olympiads">← Назад</a>
+    </div>
+
+    <h3 style="margin-top: 18px;">Этапы</h3>
+
+    <ul class="stages">
+      @for (stage of olympiad.stages; track stage.title) {
+        <li class="stage">
+          <b>{{ stage.title }}</b>
+          <div>{{ stage.info }}</div>
+        </li>
+      }
+    </ul>
+  </div>
+
+} @else {
+  <div class="details-card">
+    <h2>Олимпиада не найдена</h2>
+    <a class="btn primary" routerLink="/olympiads">Вернуться к списку</a>
+  </div>
+}

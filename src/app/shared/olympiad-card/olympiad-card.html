@@ -1,0 +1,31 @@
+<div class="card" appHoverCard>
+  <img class="logo" [src]="olympiad().logo" alt="logo" />
+
+  <div class="card-content">
+    <div class="top">
+      <h3>{{ olympiad().name }}</h3>
+
+      <span class="badge" [ngClass]="{ 'dark': olympiad().level === null }">
+        {{ olympiad().level | levelLabel }}
+      </span>
+    </div>
+
+    <p class="desc">{{ olympiad().description }}</p>
+
+    <div class="tags">
+      @for (t of olympiad().tags; track t) {
+        <span class="tag">{{ t }}</span>
+      }
+    </div>
+
+    <div class="buttons">
+      <a class="btn" [href]="olympiad().website" target="_blank">Офиц. сайт</a>
+
+      <a class="btn primary"
+         [routerLink]="['/olympiads', olympiad().id]"
+         (click)="openDetails.emit(olympiad().id)">
+        Подробнее →
+      </a>
+    </div>
+  </div>
+</div>

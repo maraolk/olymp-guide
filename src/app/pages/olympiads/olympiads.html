@@ -1,0 +1,28 @@
+<h2>Список олимпиад</h2>
+
+<div class="filters">
+  <div class="filter">
+    <label>Поиск по названию</label>
+    <input [(ngModel)]="searchText" placeholder="например: ММО" />
+  </div>
+
+  <div class="filter">
+    <label>Уровень</label>
+    <select [(ngModel)]="levelFilter">
+      <option value="all">Все</option>
+      <option value="1">Уровень 1</option>
+      <option value="2">Уровень 2</option>
+      <option value="3">Уровень 3</option>
+      <option value="state">Государственная</option>
+    </select>
+  </div>
+</div>
+
+<div class="cards">
+  @for (o of filteredOlympiads; track o.id) {
+    <app-olympiad-card
+      [olympiad]="o"
+      (openDetails)="onOpenDetails($event)">
+    </app-olympiad-card>
+  }
+</div>
